@@ -1,0 +1,39 @@
+{
+  "name": "faucetbot",
+  "version": "1.0.0",
+  "description": "Discord bot that dispenses testnet State token",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ParaState/discord-faucet-bot.git"
+  },
+  "author": "chen7897499@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ParaState/discord-faucet-bot/issues"
+  },
+  "homepage": "https://github.com/ParaState/discord-faucet-bot#readme",
+  "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.9"
+  },
+  "dependencies": {
+    "@keyv/sqlite": "^3.6.4",
+    "bufferutil": "^4.0.7",
+    "discord.js": "^14.7.1",
+    "dotenv": "^10.0.0",
+    "erlpack": "github:discord/erlpack",
+    "keyv": "^4.5.2",
+    "moment": "^2.29.4",
+    "sqlite3": "^5.1.4",
+    "utf-8-validate": "^5.0.10",
+    "web3": "^1.5.1",
+    "zlib-sync": "^0.1.7"
+  }
+}
