@@ -89,4 +89,4 @@ jobs:
         HELM_BIN: ${{ steps.helm-install.outputs.helm-path }}
       run: |
         echo "Helm upgrade safestake-discord-faucet $IMAGE_TAG"
-        $HELM_BIN upgrade --install -f $GITHUB_WORKSPACE/deploy/safestake-discord-faucet/values.yaml safestake-discord-faucet $GITHUB_WORKSPACE/deploy/safestake-discord-faucet --set=image.tag=$IMAGE_TAG --namespace=staging --set=env.discord_bot_token=$DISCORD_TOKEN --set=env.erc20_address=$ERC20_ADDRESS --set=env.faucet_private_key=$FAUCET_PRIVATE_KEY --set=env.faucet_public_key=$FAUCET_PUBLIC_KEY
+        $HELM_BIN upgrade --install -f $GITHUB_WORKSPACE/cicd/safestake-faucet/values.yaml ss $GITHUB_WORKSPACE/cicd/safestake-faucet --set=image.tag=$IMAGE_TAG --namespace=staging --set=env.discord_bot_token=$DISCORD_TOKEN --set=env.erc20_address=$ERC20_ADDRESS --set=env.faucet_private_key=$FAUCET_PRIVATE_KEY --set=env.faucet_public_key=$FAUCET_PUBLIC_KEY
