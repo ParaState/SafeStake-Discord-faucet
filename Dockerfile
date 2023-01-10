@@ -5,4 +5,4 @@ RUN mkdir /data
 RUN npm install
 RUN node deploy-commands.js
 RUN npm install -g pm2
-CMD pm2 start index.js    
+CMD ["pm2-runtime", "index.js"]
