@@ -82,7 +82,7 @@ jobs:
     - name: Helm upgrade chart
       env: 
         IMAGE_TAG: ${{ github.sha }}
-        DISCORD_TOKEN: ${{ secrets.$DISCORD_TOKEN }}
+        DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         ERC20_ADDRESS: ${{ secrets.ERC20_ADDRESS }}
         FAUCET_PRIVATE_KEY: ${{ secrets.FAUCET_PRIVATE_KEY }}
         FAUCET_PUBLIC_KEY: ${{ secrets.FAUCET_PUBLIC_KEY }}
