@@ -93,7 +93,7 @@ env:
   discord_bot_guildid: "769941371581890580"
   discord_bot_token: token-xxxxxxx
   data_dir: /data
-  blockchain_rpc: https://eth-goerli.g.alchemy.com/v2/yd-CwLqnHujNN5oXyFodvVakeMb7jly9 
+  blockchain_rpc: "https://eth-goerli.g.alchemy.com/v2/yd-CwLqnHujNN5oXyFodvVakeMb7jly9"
   erc20_address: ec220-xxxxx
   erc20_token_amount_in_wei: "120000000000000000000"
   gas_price: "5000000000"

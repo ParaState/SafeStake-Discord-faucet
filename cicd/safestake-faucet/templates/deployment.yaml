@@ -35,16 +35,19 @@ spec:
         {{- else }}
         emptyDir: {}
         {{- end  }}
-      - name: secret-env
-        secret:
-          secretName: {{ include "safestake-faucet.fullname" . }}
+      - name: config-env
+        configMap:
+          name: {{ include "safestake-faucet.fullname" . }}
+          items:
+          - key: ".env"
+            path: ".env"
       containers:
         - name: {{ .Chart.Name }}
           volumeMounts:
           - mountPath: /data
             name: db-data
-          - mountPath: "/app/.env"
-            name: secret-env
+          - mountPath: "/app"
+            name: config-env
             readOnly: true
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
