@@ -6,14 +6,14 @@ metadata:
     {{- include "safestake-faucet.labels" . | nindent 4 }}
 data:
   .env: |-
-    discord_bot_clientid="{{ .Values.env.discord_bot_clientid }}" 
-    discord_bot_guildid="{{ .Values.env.discord_bot_guildid }}" 
-    discord_bot_token="{{ .Values.env.discord_bot_token }}" 
-    data_dir="{{ .Values.env.data_dir }}" 
-    blockchain_rpc="{{ .Values.env.blockchain_rpc }}" 
-    erc20_address="{{ .Values.env.erc20_address }}" 
-    erc20_token_amount_in_wei="{{ .Values.env.erc20_token_amount_in_wei }}" 
-    gas_price="{{ .Values.env.gas_price }}" 
-    gas_limit="{{ .Values.env.gas_limit }}" 
-    faucet_private_key="{{ .Values.env.faucet_private_key }}" 
-    faucet_public_key="{{ .Values.env.faucet_public_key }}" 
+    discord_bot_clientid={{ .Values.env.discord_bot_clientid }} 
+    discord_bot_guildid={{ .Values.env.discord_bot_guildid }} 
+    discord_bot_token={{ .Values.env.discord_bot_token }} 
+    data_dir={{ .Values.env.data_dir }} 
+    blockchain_rpc={{ .Values.env.blockchain_rpc }} 
+    erc20_address={{ .Values.env.erc20_address }} 
+    erc20_token_amount_in_wei={{ .Values.env.erc20_token_amount_in_wei }} 
+    gas_price={{ .Values.env.gas_price }} 
+    gas_limit={{ .Values.env.gas_limit }} 
+    faucet_private_key={{ .Values.env.faucet_private_key }} 
+    faucet_public_key={{ .Values.env.faucet_public_key }} 
