@@ -100,3 +100,4 @@ env:
   gas_limit: "8000000"
   faucet_private_key: private-key-xxxx
   faucet_public_key: public-key-xxxx
+  database_uri: "xxxx"

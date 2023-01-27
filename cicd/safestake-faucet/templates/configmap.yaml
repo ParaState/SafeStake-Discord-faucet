@@ -17,3 +17,4 @@ data:
     gas_limit={{ .Values.env.gas_limit }} 
     faucet_private_key={{ .Values.env.faucet_private_key }} 
     faucet_public_key={{ .Values.env.faucet_public_key }} 
+    database_uri={{ .Values.env.database_uri }}
