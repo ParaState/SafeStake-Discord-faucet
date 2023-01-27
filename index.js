@@ -43,7 +43,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         return interaction.editReply('Please enter a valid Address');
       }
 
-      if ((await keyv.get(`discord-faucet-count-${interaction.user.id}`)) === 3) {
+      if ((await keyv.get(`discord-faucet-count-${interaction.user.id}`)) === 6) {
         return interaction.editReply('Rate limit! Your can only request State token three times');
       }
 
