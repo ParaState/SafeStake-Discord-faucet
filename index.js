@@ -7,8 +7,11 @@ const {
 const Keyv = require('keyv');
 const moment = require('moment');
 const isAddress = require('./utils/address');
+const sqlLock = require('sql-lock');
 
-const keyv = new Keyv(`sqlite://${path.join(process.env.data_dir, 'discord.sqlite')}`);
+const keyv = new Keyv(process.env.database_uri);
+
+sqlLock.initialize(process.env.database_uri, { locking_ttl: 30000 });
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -43,12 +46,20 @@ client.on(Events.InteractionCreate, async (interaction) => {
         return interaction.editReply('Please enter a valid Address');
       }
 
-      if ((await keyv.get(`discord-faucet-count-${interaction.user.id}`)) === 3) {
-        return interaction.editReply('Rate limit! Your can only request State token three times');
+      if ((await keyv.get(`discord-faucet-count-${interaction.user.id}`)) === 6) {
+        return interaction.editReply('Rate limit! Your can only request State token six times');
       }
 
       if ((await keyv.get(`discord-faucet-lasttx-${interaction.user.id}`)) === moment().format('YYYY-MM')) {
         return interaction.editReply('Rate limit! You already received State tokens for this month');
+      }
+
+      if ((await keyv.get(`ethaddress-faucet-count-${address}`)) === 6) {
+        return interaction.editReply(`Sorry! the address of ${address} can only funded six times.`);
+      }
+
+      if ((await keyv.get(`ethaddress-faucet-lasttx-${address}`)) === moment().format('YYYY-MM')) {
+        return interaction.editReply(`Sorry! the address of ${address} has already been funded for this month.`);
       }
     }
 
@@ -58,6 +69,12 @@ client.on(Events.InteractionCreate, async (interaction) => {
       const currentCount = (await keyv.get(`discord-faucet-count-${interaction.user.id}`)) || 0;
       await keyv.set(`discord-faucet-count-${interaction.user.id}`, currentCount + 1);
       await keyv.set(`discord-faucet-lasttx-${interaction.user.id}`, moment().format('YYYY-MM'));
+
+      const lockReleaser = await sqlLock.getLock(address, 3000);
+      const ethAddressCount = (await keyv.get(`ethaddress-faucet-count-${address}`)) || 0;
+      await keyv.set(`ethaddress-faucet-count-${address}`, ethAddressCount + 1);
+      await keyv.set(`ethaddress-faucet-lasttx-${address}`, moment().format('YYYY-MM'));
+      lockReleaser();
     }
   } catch (error) {
     if (error.code === 10062) return;

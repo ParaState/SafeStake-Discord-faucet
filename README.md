@@ -33,7 +33,7 @@ I highly recommend a process manager such as [PM2](https://pm2.keymetrics.io/) o
 
 # Env
 You can change the following in the `.env` file: 
-* `data_dir`: where sqlite stores user data, Set to "/data" by default, Data directory must exist before bots run
+* `database_uri`: mysql database uri, for example: mysql://username:password@host:port/dbname
 * `faucet_private_key`: Private key of faucet account
 * `faucet_public_key`: Public key of faucet account
 * `erc20_token_amount_in_wei`: amount of State token to send Per request in wei unit
