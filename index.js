@@ -46,16 +46,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
         return interaction.editReply('Please enter a valid Address');
       }
 
-      if ((await keyv.get(`discord-faucet-count-${interaction.user.id}`)) === 6) {
-        return interaction.editReply('Rate limit! Your can only request State token six times');
-      }
-
       if ((await keyv.get(`discord-faucet-lasttx-${interaction.user.id}`)) === moment().format('YYYY-MM')) {
         return interaction.editReply('Rate limit! You already received State tokens for this month');
-      }
-
-      if ((await keyv.get(`ethaddress-faucet-count-${address}`)) === 6) {
-        return interaction.editReply(`Sorry! the address of ${address} can only funded six times.`);
       }
 
       if ((await keyv.get(`ethaddress-faucet-lasttx-${address}`)) === moment().format('YYYY-MM')) {
@@ -66,13 +58,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
     await command.execute(interaction);
 
     if (command.data.name === 'faucet') {
-      const currentCount = (await keyv.get(`discord-faucet-count-${interaction.user.id}`)) || 0;
-      await keyv.set(`discord-faucet-count-${interaction.user.id}`, currentCount + 1);
       await keyv.set(`discord-faucet-lasttx-${interaction.user.id}`, moment().format('YYYY-MM'));
 
       const lockReleaser = await sqlLock.getLock(address, 3000);
-      const ethAddressCount = (await keyv.get(`ethaddress-faucet-count-${address}`)) || 0;
-      await keyv.set(`ethaddress-faucet-count-${address}`, ethAddressCount + 1);
       await keyv.set(`ethaddress-faucet-lasttx-${address}`, moment().format('YYYY-MM'));
       lockReleaser();
     }
