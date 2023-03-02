@@ -12,8 +12,8 @@ module.exports = async (toAddress) => {
   const tx = {
     to: process.env.erc20_address,
     from: process.env.faucet_public_key,
-    gasPrice: gas,
-    gas: gasPrice,
+    gasPrice: gasPrice,
+    gas: gas,
     data: transferObjectEncoded,
   };
 
