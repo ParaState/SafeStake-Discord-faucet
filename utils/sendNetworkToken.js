@@ -6,11 +6,14 @@ module.exports = async (toAddress) => {
   const contract = new web3.eth.Contract(erc20_abi, process.env.erc20_address);
   const transferObjectEncoded = contract.methods.transfer(toAddress, process.env.erc20_token_amount_in_wei).encodeABI();
 
+  const gas = await contract.methods.transfer(toAddress, process.env.erc20_token_amount_in_wei).estimateGas({ from: process.env.faucet_public_key })
+  const gasPrice = await web3.eth.getGasPrice();
+
   const tx = {
     to: process.env.erc20_address,
     from: process.env.faucet_public_key,
-    gasPrice: process.env.gas_price,
-    gas: process.env.gas_limit,
+    gasPrice: gas,
+    gas: gasPrice,
     data: transferObjectEncoded,
   };
 
