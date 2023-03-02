@@ -95,7 +95,7 @@ env:
   blockchain_rpc: "https://eth-goerli.g.alchemy.com/v2/yd-CwLqnHujNN5oXyFodvVakeMb7jly9"
   erc20_address: ec220-xxxxx
   erc20_token_amount_in_wei: "120000000000000000000"
-  gas_price: "5000000000"
+  gas_price: "50000000000"
   gas_limit: "8000000"
   faucet_private_key: private-key-xxxx
   faucet_public_key: public-key-xxxx
