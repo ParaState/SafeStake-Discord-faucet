@@ -46,29 +46,29 @@ client.on(Events.InteractionCreate, async (interaction) => {
         return interaction.editReply('Please enter a valid Address');
       }
 
-      if ((await keyv.get(`discord-faucet-lasttx-${interaction.user.id}`)) === moment().format('YYYY-MM')) {
-        return interaction.editReply('Rate limit! You already received State tokens for this month');
+      if ((await keyv.get(`discord-faucet-lasttx-week-${interaction.user.id}`)) === moment().startOf('isoweek').format("YYYY-MM-DD")) {
+        return interaction.editReply('Rate limit! You already received State tokens for this week');
       }
 
-      if ((await keyv.get(`ethaddress-faucet-lasttx-${address}`)) === moment().format('YYYY-MM')) {
-        return interaction.editReply(`Sorry! the address of ${address} has already been funded for this month.`);
+      if ((await keyv.get(`ethaddress-faucet-lasttx-week-${address}`)) === moment().startOf('isoweek').format("YYYY-MM-DD")) {
+        return interaction.editReply(`Sorry! the address of ${address} has already been funded for this week.`);
       }
     }
 
     await command.execute(interaction);
 
     if (command.data.name === 'faucet') {
-      await keyv.set(`discord-faucet-lasttx-${interaction.user.id}`, moment().format('YYYY-MM'));
+      await keyv.set(`discord-faucet-lasttx-week-${interaction.user.id}`, moment().startOf('isoweek').format("YYYY-MM-DD"));
 
       const lockReleaser = await sqlLock.getLock(address, 3000);
-      await keyv.set(`ethaddress-faucet-lasttx-${address}`, moment().format('YYYY-MM'));
+      await keyv.set(`ethaddress-faucet-lasttx-week-${address}`, moment().startOf('isoweek').format("YYYY-MM-DD"));
       lockReleaser();
     }
   } catch (error) {
     if (error.code === 10062) return;
     if (error.code === 40060) return;
     console.error(error);
-    return interaction.editReply({ content: 'There was an error while executing this command!', ephemeral: true });
+    return interaction.editReply({ content: 'Command execution completed', ephemeral: true });
   }
 });
 
