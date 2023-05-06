@@ -37,7 +37,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
   if (!command) return;
 
   try {
-    if (command.data.name === 'faucet') {
+    if (command.data.name === 'faucet-dvt') {
       const address = interaction.options.get('address').value.trim();
 
       await interaction.deferReply();
@@ -46,22 +46,22 @@ client.on(Events.InteractionCreate, async (interaction) => {
         return interaction.editReply('Please enter a valid Address');
       }
 
-      if ((await keyv.get(`discord-faucet-lasttx-week-${interaction.user.id}`)) === moment().startOf('isoweek').format("YYYY-MM-DD")) {
-        return interaction.editReply('Rate limit! You already received State tokens for this week');
+      if ((await keyv.get(`discord-faucet-dvt-lasttx-day-${interaction.user.id}`)) === moment().format("YYYY-MM-DD")) {
+        return interaction.editReply('You have reached the rate limit! You have already received the DVT tokens for today.');
       }
 
-      if ((await keyv.get(`ethaddress-faucet-lasttx-week-${address}`)) === moment().startOf('isoweek').format("YYYY-MM-DD")) {
-        return interaction.editReply(`Sorry! the address of ${address} has already been funded for this week.`);
+      if ((await keyv.get(`ethaddress-faucet-dvt-lasttx-day-${address}`)) === moment().format("YYYY-MM-DD")) {
+        return interaction.editReply(`Sorry! the address of ${address} has already been funded for today.`);
       }
     }
 
     await command.execute(interaction);
 
-    if (command.data.name === 'faucet') {
-      await keyv.set(`discord-faucet-lasttx-week-${interaction.user.id}`, moment().startOf('isoweek').format("YYYY-MM-DD"));
+    if (command.data.name === 'faucet-dvt') {
+      await keyv.set(`discord-faucet-dvt-lasttx-day-${interaction.user.id}`, moment().format("YYYY-MM-DD"));
 
       const lockReleaser = await sqlLock.getLock(address, 3000);
-      await keyv.set(`ethaddress-faucet-lasttx-week-${address}`, moment().startOf('isoweek').format("YYYY-MM-DD"));
+      await keyv.set(`ethaddress-faucet-dvt-lasttx-day-${address}`, moment().format("YYYY-MM-DD"));
       lockReleaser();
     }
   } catch (error) {
