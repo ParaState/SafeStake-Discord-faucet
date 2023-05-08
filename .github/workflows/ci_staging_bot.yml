@@ -67,4 +67,4 @@ jobs:
         DATABASE_URI: ${{ secrets.DATABASE_URI }}
       run: |
         echo "Helm upgrade safestake-discord-faucet2 $IMAGE_TAG"
-        $HELM_BIN upgrade --install -f $GITHUB_WORKSPACE/cicd/safestake-faucet/values2.yaml ss-faucet2 $GITHUB_WORKSPACE/cicd/safestake-faucet --set=image.tag=$IMAGE_TAG --namespace=staging --set=env.discord_bot_token=$DISCORD_TOKEN2 --set=env.erc20_address=$ERC20_ADDRESS2 --set=env.faucet_private_key=$FAUCET_PRIVATE_KEY --set=env.faucet_public_key=$FAUCET_PUBLIC_KEY --set env.database_uri=$DATABASE_URI
+        $HELM_BIN upgrade --install -f $GITHUB_WORKSPACE/cicd/safestake-faucet/values2.yaml ss-faucet2 $GITHUB_WORKSPACE/cicd/safestake-faucet --set=image.tag=$IMAGE_TAG --namespace=staging --set=env.discord_bot_token=$DISCORD_TOKEN --set=env.erc20_address=$ERC20_ADDRESS --set=env.faucet_private_key=$FAUCET_PRIVATE_KEY --set=env.faucet_public_key=$FAUCET_PUBLIC_KEY --set env.database_uri=$DATABASE_URI
