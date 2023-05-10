@@ -42,6 +42,10 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
       await interaction.deferReply();
 
+      if (interaction.channel.id !== '1104288805395103824') {
+        return interaction.editReply('You can not use this command in this channel');
+      }
+
       if (!isAddress(address)) {
         return interaction.editReply('Please enter a valid Address');
       }
