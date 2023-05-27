@@ -11,6 +11,8 @@ const sqlLock = require('sql-lock');
 
 const keyv = new Keyv(process.env.database_uri);
 
+keyv.on('error', err => console.log('Connection Error', err));
+
 sqlLock.initialize(process.env.database_uri, { locking_ttl: 30000 });
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -64,9 +66,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
     if (command.data.name === 'faucet') {
       await keyv.set(`discord-faucet-lasttx-week-${interaction.user.id}`, moment().startOf('isoweek').format("YYYY-MM-DD"));
 
-      const lockReleaser = await sqlLock.getLock(address, 3000);
+      // const lockReleaser = await sqlLock.getLock(address, 3000);
       await keyv.set(`ethaddress-faucet-lasttx-week-${address}`, moment().startOf('isoweek').format("YYYY-MM-DD"));
-      lockReleaser();
+      // lockReleaser();
     }
   } catch (error) {
     if (error.code === 10062) return;
