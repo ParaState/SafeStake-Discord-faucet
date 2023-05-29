@@ -44,7 +44,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
       await interaction.deferReply();
 
-      if (interaction.channel.id !== '1060939741375250503') {
+      if (interaction.channel.id !== '1112339426597670983') {
         return interaction.editReply('You can not use this command in this channel');
       }
 
