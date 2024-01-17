@@ -94,7 +94,7 @@ env:
   data_dir: /data
   blockchain_rpc: "https://ethereum-holesky.publicnode.com"
   erc20_address: ec220-xxxxx
-  erc20_token_amount_in_wei: "120000000000000000000"
+  erc20_token_amount_in_wei: "150000000000000000000"
   gas_price: "50000000000"
   gas_limit: "8000000"
   faucet_private_key: private-key-xxxx
