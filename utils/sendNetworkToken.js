@@ -24,7 +24,7 @@ module.exports = async (toAddress) => {
 
     web3.eth.sendSignedTransaction(signedTX.rawTransaction)
       .on('transactionHash', (hash) => {
-        console.log(`Transaction: https://goerli.etherscan.io/tx/${hash}`);
+        console.log(`Transaction: https://holesky.etherscan.io/tx/${hash}`);
         resolve({ status: 'success', message: hash });
       })
       .on('error', (error) => {

@@ -21,7 +21,7 @@ module.exports = {
     if (receipt.status === 'success') {
       const embed = new EmbedBuilder()
         .setColor('#3BA55C')
-        .setDescription(`[View on Goeril etherscan](https://goerli.etherscan.io/tx/${receipt.message})`);
+        .setDescription(`[View on holesky etherscan](https://holesky.etherscan.io/tx/${receipt.message})`);
       return interaction.followUp({ content: 'Transaction for DVT token created.', embeds: [embed] });
     }
     return interaction.followUp('Failed to send DVT token');
